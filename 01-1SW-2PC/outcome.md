@@ -1,14 +1,9 @@
-========================================
-Verification
-========================================
+## Verification
 
-#VPCS1
+### VPCS1
+**Ping PC2**
 
-ping 192.168.1.20
-
-Result:
-Successful replies received.
-
+```text
 PC1> ping 10.1.1.200
 
 84 bytes from 10.1.1.200 icmp_seq=1 ttl=64 time=2.516 ms
@@ -16,17 +11,14 @@ PC1> ping 10.1.1.200
 84 bytes from 10.1.1.200 icmp_seq=3 ttl=64 time=1.331 ms
 84 bytes from 10.1.1.200 icmp_seq=4 ttl=64 time=2.065 ms
 84 bytes from 10.1.1.200 icmp_seq=5 ttl=64 time=2.886 ms
+```
 
+---
 
-----------------------------------------
+### VPCS2
+**Ping PC1**
 
-#VPCS2
-
-ping 192.168.1.10
-
-Result:
-Successful replies received.
-
+```text
 PC2> ping 10.1.1.100
 
 84 bytes from 10.1.1.100 icmp_seq=1 ttl=64 time=4.710 ms
@@ -34,45 +26,48 @@ PC2> ping 10.1.1.100
 84 bytes from 10.1.1.100 icmp_seq=3 ttl=64 time=4.252 ms
 84 bytes from 10.1.1.100 icmp_seq=4 ttl=64 time=3.987 ms
 84 bytes from 10.1.1.100 icmp_seq=5 ttl=64 time=3.382 ms
+```
 
+---
 
-----------------------------------------
+### Switch Verification
 
-#SW1
+#### MAC Address Table
 
-SW1>enable
-SW1#
-SW1#
-SW1#show mac address 
-SW1#show mac address-table 
+```text
+SW1# show mac address-table
+
           Mac Address Table
+-------------------------------------------
 
-Vlan    Mac Address       Type        Ports
-----    -----------       --------    -----
-   1    0050.7966.6800    DYNAMIC     Gi0/2
-   1    0050.7966.6801    DYNAMIC     Gi0/3
+Vlan    Mac Address       Type       Ports
+----    -----------       --------   -----
+1       0050.7966.6800    DYNAMIC    Gi0/2
+1       0050.7966.6801    DYNAMIC    Gi0/3
+
 Total Mac Addresses for this criterion: 2
-SW1#
-SW1#
-SW1#show interfaces status
+```
 
-Port      Name               Status       Vlan       Duplex  Speed Type 
-Gi0/0                        notconnect   1            auto   auto unknown
-Gi0/1                        notconnect   1            auto   auto unknown
-Gi0/2                        connected    1            auto   auto unknown
-Gi0/3                        connected    1            auto   auto unknown
-Gi1/0                        notconnect   1            auto   auto unknown
-Gi1/1                        notconnect   1            auto   auto unknown
-Gi1/2                        notconnect   1            auto   auto unknown
-Gi1/3                        notconnect   1            auto   auto unknown
+#### Interface Status
 
+```text
+SW1# show interfaces status
 
-========================================
-Observations
-========================================
+Port    Name    Status      Vlan    Duplex   Speed   Type
+Gi0/0           notconnect  1       auto     auto    unknown
+Gi0/1           notconnect  1       auto     auto    unknown
+Gi0/2           connected   1       auto     auto    unknown
+Gi0/3           connected   1       auto     auto    unknown
+Gi1/0           notconnect  1       auto     auto    unknown
+Gi1/1           notconnect  1       auto     auto    unknown
+Gi1/2           notconnect  1       auto     auto    unknown
+Gi1/3           notconnect  1       auto     auto    unknown
+```
 
-- Both VPCS hosts communicated successfully.
-- The switch dynamically learned the MAC addresses of both hosts.
+## Observations
+
+- End-to-end connectivity between both hosts was successful.
+- The switch dynamically learned both hosts' MAC addresses.
 - No manual switch configuration was required.
 - ARP resolution occurred before ICMP communication.
-
+- Both active hosts appear in the MAC address table on their respective switch ports.
