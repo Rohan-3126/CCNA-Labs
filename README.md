@@ -16,6 +16,11 @@ The purpose of this repository is to document practical networking concepts thro
 
 # Repository Structure
 
+Terminologies
+* SWX - switches
+* RX - routers
+* PCX - Virtual PC Simulators
+
 ```
 ccna-labs/
 │
@@ -30,17 +35,17 @@ ccna-labs/
 ```
 01-basic-switch-2pc/
 │
-├── README.md
-├── topology.png
 ├── configs.txt
-└── outcome.md
+├── outcome.md
+├── README.md
+└── topology.png
 ```
 
 Each lab contains:
 
-* `README.md` – Lab objective, topology, addressing and concepts.
 * `configs.txt` – Device configurations.
 * `outcome.txt` – Verification commands, outputs and observations.
+* `README.md` – Lab objective, topology, addressing and concepts.
 * `topology.png` – GNS3 topology diagram.
 
 
